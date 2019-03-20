@@ -1,0 +1,7 @@
+<div class="todolist">
+  <h1>Already Done</h1>
+  <ul id="done-items" class="list-unstyled">
+    <li *ngFor="let item of alreadyDoneList; let i = index;">
+      <app-todo-item [todoItem]="item" [index]="i"></app-todo-item>
+    </li>
+  </ul>
