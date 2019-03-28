@@ -18,21 +18,34 @@ export class TodoService {
   }
 
   addItem(newVal: string) {
+    this.todoList.push(new TodoItem(newVal));
   }
 
   deleteItem(index: number) {
+    this.todoList.splice(index, 1);
   }
 
-  checkItem(index: number) {
+  checkUncompletedItem(index: number) {
+    const checkedItems = this.todoList.splice(index, 1)
+      .map(item => this.updateCompleteStatus(item));
 
+    this.alreadyList.push(...checkedItems);
   }
 
-  uncheckItem(index: number) {
+  uncheckCompletedItem(index: number) {
+    const checkedItems = this.alreadyList.splice(index, 1)
+      .map(item => this.updateCompleteStatus(item));
 
+    this.todoList.push(...checkedItems);
   }
 
+  updateCompleteStatus(item: TodoItem): TodoItem {
+    item.completed = !item.completed;
+    return item;
+  }
 
   checkAllItem() {
-
+    const checkedItems = this.todoList.splice(0, this.todoList.length).map(item => this.updateCompleteStatus(item));
+    this.alreadyList.push(...checkedItems);
   }
 }
