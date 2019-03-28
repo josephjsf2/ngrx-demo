@@ -7,6 +7,9 @@ import { TodoListComponent } from './pages/todos/components/todo-list/todo-list.
 import { TodoItemComponent } from './pages/todos/components/todo-item/todo-item.component';
 import { TodoPageComponent } from './pages/todos/components/todo-page/todo-page.component';
 import { AlreadyDoneComponent } from './pages/todos/components/already-done/already-done.component';
+import { StoreModule } from '@ngrx/store';
+import { todoListReducer } from './pages/todos/reducers/todo-list.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { AlreadyDoneComponent } from './pages/todos/components/already-done/alre
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ todoState: todoListReducer }),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

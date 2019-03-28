@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoItem } from '../../models/todo-item.model';
 import { TodoService } from '../../services/todo.service';
+import { TodoState } from '../../reducers/todo-list.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-already-done',
@@ -11,10 +13,10 @@ export class AlreadyDoneComponent implements OnInit {
 
   alreadyDoneList: TodoItem[] = [];
 
-  constructor(private todoService: TodoService) { }
+  constructor(private store: Store<TodoState>) { }
 
   ngOnInit() {
-    this.alreadyDoneList = this.todoService.alreadyList;
+    this.store.select('todoState').subscribe((state: TodoState) => this.alreadyDoneList = state.alreadyDoneList);
   }
 
 }
